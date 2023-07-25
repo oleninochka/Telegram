@@ -1,0 +1,38 @@
+[tool.poetry]
+name = "ctf-platform-telegram"
+version = "0.1.0"
+description = "Telegram Bot for CTF platform"
+authors = ["Krasnopolsky Ivan <i1.krasnopolskiy@gmail.com>"]
+readme = "README.md"
+packages = [{ include = "ctf_platform_telegram" }]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+# Code Style
+blue = "0.9.1"
+
+[tool.poetry.dependencies]
+# Core
+python = "~3.11"
+aiogram = "3.0.0b5"
+aiogram_dialog = "2.0.0b18"
+
+# Database
+peewee = "3.16.2"
+pymysql = "1.1.0"
+
+# Config
+pyyaml = "6.0.1"
+python-dotenv = "1.0.0"
+
+# Utils
+colorlog = "6.7.0"
+dacite = "1.8.1"
+
+[tool.blue]
+line-length = 120
+target-version = ['py310']
+skip-string-normalization = true

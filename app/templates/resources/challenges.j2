@@ -1,0 +1,13 @@
+<b>Задачи</b>
+
+
+{% for challenge in challenges %}
+============
+<b>{{ challenge.name }}</b>
+
+<b>Стоимость:</b> <code>{{ challenge.weight }}</code>
+
+<b>ID:</b> <code>{{ challenge.id }}</code>
+============
+
+{% endfor %}
