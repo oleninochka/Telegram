@@ -1,11 +1,11 @@
 from dataclasses import dataclass
 from typing import Optional
 
-from app.api.dto.base import BaseEntity
+from app.api.dto.base import BaseResponse
 
 
 @dataclass
-class ChallengeResponse(BaseEntity):
+class ChallengeResponse(BaseResponse):
     id: str
     name: str
     description: str

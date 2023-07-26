@@ -5,9 +5,10 @@ from aiogram.types import Message, CallbackQuery
 from aiogram_dialog import DialogManager
 from aiogram_dialog.widgets.input import MessageInput
 
+from app.api.dto.base import ApiResponse
 from app.api.dto.challenge import ChallengeResponse, SubmitRequest
-from app.api.dto.container import ApiResponse
 from app.api.service import ChallengeService
+from app.database.entity import User
 from app.view.state import ChallengeStateGroup
 
 
@@ -35,7 +36,15 @@ class ChallengeHandler:
     @staticmethod
     async def submit(message: Message, input: MessageInput, dialog_manager: DialogManager):
         challenge: ApiResponse[ChallengeResponse] = dialog_manager.dialog_data['challenge']
-        request = SubmitRequest.build(message)
+        request = ChallengeHandler.submit_request(message)
         response = await ChallengeService.submit(challenge.data.id, request)
         await message.reply(response.message)
         await dialog_manager.switch_to(ChallengeStateGroup.menu)
+
+    @staticmethod
+    def submit_request(message: Message):
+        user: User = User.get_or_none(User.chat_id == message.chat.id)
+        return SubmitRequest(
+            userId=str(user.id),
+            flag=message.text,
+        )

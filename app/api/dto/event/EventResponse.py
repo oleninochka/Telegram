@@ -2,11 +2,13 @@ from dataclasses import dataclass
 from typing import Optional
 
 from app.api.dto.base import BaseResponse
-from app.api.dto.team import TeamResponse
 
 
 @dataclass
-class UserResponse(BaseResponse):
+class EventResponse(BaseResponse):
     id: str
-    name: str
-    team: Optional[TeamResponse] = None
+    title: str
+    speaker: str
+    affiliate: Optional[str]
+    start: str
+    end: str

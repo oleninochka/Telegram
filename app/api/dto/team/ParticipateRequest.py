@@ -2,6 +2,6 @@ from dataclasses import dataclass
 
 
 @dataclass
-class SubmitRequest:
+class ParticipateRequest:
     userId: str
-    flag: str
+    invite: str
