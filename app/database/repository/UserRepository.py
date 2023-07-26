@@ -1,13 +1,13 @@
 from aiogram.types import Message
 
-from app.backend.api import UserApi
+from app.api.service import UserService
 from app.database.entity.User import User
 
 
 class UserRepository:
     @staticmethod
     async def save_user(message: Message):
-        response = await UserApi.find_by_chat_id(message.chat.id)
+        response = await UserService.find_by_chat_id(message.chat.id)
         user = User(
             id=response.data.id,
             telegram_id=message.from_user.id,

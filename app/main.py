@@ -1,14 +1,14 @@
 import logging
 
 from app import dp, bot
-from app.handler.dialog.register import register_dialogs
-from app.handler.router.register import register_routes
+from app.controller.router import register_routes
+from app.view.dialog import register_dialogs
 
-logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
 
 
 def start():
+    logger = logging.getLogger(__name__)
     logger.info('started')
     try:
         dp.run_polling(bot)
