@@ -6,8 +6,8 @@ from typing import Generic, Type, Dict, TypeVar, Optional
 from aiohttp import ClientResponse
 
 from app.backend.dto.base import BaseDto
-from app.backend.dto.container import ListResponse
-from app.backend.dto.container import PageResponse
+from app.backend.dto.container.ListResponse import ListResponse
+from app.backend.dto.container.PageResponse import PageResponse
 
 T = TypeVar('T', BaseDto, BaseDto)
 

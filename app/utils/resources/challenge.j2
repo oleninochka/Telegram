@@ -2,10 +2,12 @@
 
 {{ description }}
 
-{% if command %}
+<b>Стоимость:</b> <code>{{ weight }}</code>
+{% if team %}
+
 <b>Командная задача</b>
 {% endif %}
+{% if end %}
 
-<b>Стоимость:</b> <code>{{ weight }}</code>
-
-<b>ID:</b> <code>{{ id }}</code>
+<b>Доступно до:</b> {{ end }}
+{% endif %}

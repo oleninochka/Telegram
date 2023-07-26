@@ -1,7 +1,7 @@
 from dataclasses import asdict
-from typing import List, Dict
+from typing import List, Dict, Any
 
-from aiogram.types import Message
+from aiogram.types import Message, CallbackQuery
 from aiogram_dialog import DialogManager
 from aiogram_dialog.widgets.input import MessageInput
 
@@ -9,7 +9,6 @@ from app.backend.api import ChallengeApi
 from app.backend.dto.challenge import ChallengeResponse, SubmitRequest
 from app.backend.dto.container import ApiResponse
 from app.handler.state import ChallengeStateGroup
-from app.utils import delete_message_input
 
 
 class ChallengeService:
@@ -24,14 +23,12 @@ class ChallengeService:
         return {'challenges': challenges.data.content}
 
     @staticmethod
-    async def select(message: Message, input: MessageInput, dialog_manager: DialogManager):
-        challenge_id = message.text
-        response = await ChallengeApi.find_by_id(challenge_id)
+    async def select(callback: CallbackQuery, widget: Any, dialog_manager: DialogManager, item_id: str):
+        response = await ChallengeApi.find_by_id(item_id)
         if response.status != 200:
-            await message.reply(response.message)
+            await callback.message.reply(response.message)
             await dialog_manager.switch_to(ChallengeStateGroup.menu)
         else:
-            await delete_message_input(message)
             await dialog_manager.update({'challenge': response})
             await dialog_manager.switch_to(ChallengeStateGroup.challenge)
 

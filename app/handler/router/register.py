@@ -1,6 +1,11 @@
-from app.handler.router.auth import authenticated_router, unauthenticated_router
+from aiogram_dialog import setup_dialogs
+
+from app import dp
+from app.handler.router.auth import auth_router
+from app.handler.router.menu import menu_router
 
 
 def register_routes():
-    unauthenticated_router()
-    authenticated_router()
+    auth_router()
+    menu_router()
+    setup_dialogs(dp)

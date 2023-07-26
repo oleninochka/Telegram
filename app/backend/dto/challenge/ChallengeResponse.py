@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import Optional
 
 from app.backend.dto.base import BaseEntity
 
@@ -11,3 +12,5 @@ class ChallengeResponse(BaseEntity):
     weight: float
     team: bool
     visible: bool
+    start: Optional[str]
+    end: Optional[str]

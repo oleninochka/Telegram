@@ -5,5 +5,5 @@ from app.handler.dialog.challenge import window
 
 
 def challenge_dialog():
-    dialog = Dialog(window.menu, window.select, window.challenge, window.submit)
+    dialog = Dialog(window.menu, window.challenge, window.submit)
     dp.include_router(dialog)

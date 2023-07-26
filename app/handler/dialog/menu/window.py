@@ -1,14 +1,14 @@
 from aiogram_dialog import Window
-from aiogram_dialog.widgets.kbd import Button, Row
+from aiogram_dialog.widgets.kbd import Button, Row, Start
 from aiogram_dialog.widgets.text import Const
 
-from app.handler.state import MenuStateGroup
+from app.handler.state import MenuStateGroup, ChallengeStateGroup
 from app.service import UserService
 from app.utils import TemplateLoader
 
 menu = Window(
     TemplateLoader.load('profile'),
-    Button(Const('Задачи'), id='challenges'),
+    Start(Const('Задачи'), id='challenges', state=ChallengeStateGroup.menu),
     Button(Const('Мероприятия'), id='events'),
     Button(Const('Участники'), id='menu'),
     Row(
