@@ -1,7 +1,6 @@
 from aiogram.fsm.state import StatesGroup, State
 
 
-class ChallengeStateGroup(StatesGroup):
+class EventStateGroup(StatesGroup):
     menu = State()
     select = State()
-    submit = State()

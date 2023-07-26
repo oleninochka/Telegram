@@ -14,6 +14,6 @@ class ProfileScoreResponse(BaseResponse):
     @classmethod
     def parse(cls, data: Dict):
         return ProfileScoreResponse(
-            user=UserScoreResponse.parse(data['user']),
+            user=UserScoreResponse.parse(data['team']),
             team=TeamScoreResponse.parse(data['team']),
         )

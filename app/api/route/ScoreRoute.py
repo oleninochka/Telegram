@@ -10,7 +10,7 @@ class ScoreRoute:
 
     @staticmethod
     def user_scoreboard() -> str:
-        return ScoreRoute.route.url + '/score/user'
+        return ScoreRoute.route.url + '/score/team'
 
     @staticmethod
     def team_scoreboard() -> str:

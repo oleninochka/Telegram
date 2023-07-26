@@ -20,22 +20,22 @@ class ChallengeHandler:
 
     @staticmethod
     async def select(callback: CallbackQuery, widget: Any, dialog_manager: DialogManager, item_id: str):
-        response = await ChallengeService.find_by_id(item_id)
-        if response.status != 200:
-            await callback.message.reply(response.message)
+        challenge = await ChallengeService.find_by_id(item_id)
+        if challenge.status != 200:
+            await callback.message.reply(challenge.message)
             await dialog_manager.switch_to(ChallengeStateGroup.menu)
         else:
-            await dialog_manager.update({'challenge': response})
-            await dialog_manager.switch_to(ChallengeStateGroup.challenge)
+            await dialog_manager.update({'select': challenge})
+            await dialog_manager.switch_to(ChallengeStateGroup.select)
 
     @staticmethod
-    async def render_challenge(dialog_manager: DialogManager, **kwargs):
-        response: ApiResponse = dialog_manager.dialog_data['challenge']
-        return asdict(response.data)
+    async def render(dialog_manager: DialogManager, **kwargs):
+        challenge: ApiResponse = dialog_manager.dialog_data['select']
+        return asdict(challenge.data)
 
     @staticmethod
     async def submit(message: Message, input: MessageInput, dialog_manager: DialogManager):
-        challenge: ApiResponse[ChallengeResponse] = dialog_manager.dialog_data['challenge']
+        challenge: ApiResponse[ChallengeResponse] = dialog_manager.dialog_data['select']
         request = ChallengeHandler.submit_request(message)
         response = await ChallengeService.submit(challenge.data.id, request)
         await message.reply(response.message)

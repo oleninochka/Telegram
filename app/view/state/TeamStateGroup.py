@@ -1,7 +1,7 @@
 from aiogram.fsm.state import StatesGroup, State
 
 
-class ChallengeStateGroup(StatesGroup):
+class TeamStateGroup(StatesGroup):
     menu = State()
     select = State()
-    submit = State()
+    participate = State()

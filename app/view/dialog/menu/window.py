@@ -4,13 +4,13 @@ from aiogram_dialog.widgets.text import Const
 
 from app.controller.handler import UserHandler
 from app.utils import TemplateLoader
-from app.view.state import ChallengeStateGroup, MenuStateGroup
+from app.view.state import ChallengeStateGroup, MenuStateGroup, TeamStateGroup
 
 menu = Window(
     TemplateLoader.load('profile'),
     Start(Const('Задачи'), id='challenges', state=ChallengeStateGroup.menu),
     Button(Const('Мероприятия'), id='events'),
-    Button(Const('Участники'), id='menu'),
+    Start(Const('Команды'), id='teams', state=TeamStateGroup.menu),
     Row(
         Button(Const('Личный рейтинг'), id='personal_rating'),
         Button(Const('Командный рейтинг'), id='team_rating'),

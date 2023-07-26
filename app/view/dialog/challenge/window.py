@@ -1,24 +1,16 @@
 from operator import attrgetter
 
-from aiogram.types import CallbackQuery
 from aiogram.utils.markdown import html_decoration as hd
-from aiogram_dialog import Window, DialogManager
+from aiogram_dialog import Window
 from aiogram_dialog.widgets.input import MessageInput
-from aiogram_dialog.widgets.kbd import Button, Row, SwitchTo, ScrollingGroup, Select
+from aiogram_dialog.widgets.kbd import Row, SwitchTo, ScrollingGroup, Select, Cancel
 from aiogram_dialog.widgets.text import Const, Format
 
 from app.controller.handler import ChallengeHandler
-from app.utils import TemplateLoader
-from app.view.state import MenuStateGroup, ChallengeStateGroup
-
-
-async def open_menu(callback: CallbackQuery, button: Button, dialog_manager: DialogManager):
-    await dialog_manager.done()
-    await dialog_manager.start(state=MenuStateGroup.menu)
-
+from app.view.state import ChallengeStateGroup
 
 menu = Window(
-    Const(hd.bold('Доступные задачи:')),
+    Const(hd.bold('Задачи:')),
     ScrollingGroup(
         Select(
             Format('{item.weight} | {item.name}'),
@@ -31,18 +23,19 @@ menu = Window(
         height=5,
         id='challenge_group',
     ),
+    Cancel(Const('Назад'), id='back'),
     getter=ChallengeHandler.list_challenges,
     state=ChallengeStateGroup.menu,
 )
 
-challenge = Window(
-    TemplateLoader.load('challenge'),
+select = Window(
+    Format('{item.name}'),
     Row(
         SwitchTo(Const('Назад'), id='back', state=ChallengeStateGroup.menu),
         SwitchTo(Const('Сдать флаг'), id='submit', state=ChallengeStateGroup.submit),
     ),
-    getter=ChallengeHandler.render_challenge,
-    state=ChallengeStateGroup.challenge,
+    getter=ChallengeHandler.render,
+    state=ChallengeStateGroup.select,
 )
 
 submit = Window(

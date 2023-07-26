@@ -14,5 +14,5 @@ class UserScoreResponse(BaseResponse):
     def parse(cls, data: Dict):
         return UserScoreResponse(
             score=data['score'],
-            user=UserResponse.parse(data['user'])
+            user=UserResponse.parse(data['team'])
         )

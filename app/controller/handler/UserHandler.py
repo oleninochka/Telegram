@@ -26,9 +26,11 @@ class UserHandler:
     async def link_telegram(message: Message, input: MessageInput, dialog_manager: DialogManager):
         request = UserHandler.link_telegram_request(message)
         response = await UserService.link_telegram(request)
-        await message.reply(response.message)
-        if response.status in (200, 409):
+        if response.status != 409:
+            await message.reply(response.message)
+        if response.status == 200:
             await UserRepository.save_user(message)
+            await dialog_manager.done()
             await dialog_manager.start(MenuStateGroup.menu)
 
     @staticmethod
