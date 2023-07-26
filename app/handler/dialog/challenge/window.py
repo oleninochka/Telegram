@@ -38,11 +38,7 @@ challenge = Window(
         SwitchTo(Const('Сдать флаг'), id='submit', state=ChallengeStateGroup.submit),
     ),
     getter=ChallengeService.render_challenge,
-    state=ChallengeStateGroup.challenge
+    state=ChallengeStateGroup.challenge,
 )
 
-submit = Window(
-    Const('Введите флаг:'),
-    MessageInput(ChallengeService.submit),
-    state=ChallengeStateGroup.submit
-)
+submit = Window(Const('Введите флаг:'), MessageInput(ChallengeService.submit), state=ChallengeStateGroup.submit)

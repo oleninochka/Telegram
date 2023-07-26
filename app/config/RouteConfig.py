@@ -10,6 +10,4 @@ class RouteConfig:
 
     @staticmethod
     def load() -> RouteConfig:
-        return RouteConfig(
-            url=os.getenv('API_URL')
-        )
+        return RouteConfig(url=os.getenv('API_URL'))
