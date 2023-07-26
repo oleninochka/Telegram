@@ -2,9 +2,9 @@ from dataclasses import asdict
 
 from aiohttp import ClientSession
 
-from app.backend.dto.base import ApiResponse, PageResponse
+from app.backend.dto.container import ApiResponse, PageResponse
 from app.backend.dto.user import UserResponse, LinkTelegramRequest
-from app.config.ApiRoute import UserRoute
+from app.backend.route import UserRoute
 
 
 class UserApi:

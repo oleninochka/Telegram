@@ -2,9 +2,9 @@ from dataclasses import asdict
 
 from aiohttp import ClientSession
 
-from app.backend.dto.base import ApiResponse, PageResponse
 from app.backend.dto.challenge import ChallengeResponse, SubmitRequest
-from app.config.ApiRoute import ChallengeRoute
+from app.backend.dto.container import ApiResponse, PageResponse
+from app.backend.route import ChallengeRoute
 
 
 class ChallengeApi:

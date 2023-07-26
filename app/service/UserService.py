@@ -8,6 +8,7 @@ from aiogram_dialog.widgets.input import MessageInput
 from app.backend.api import UserApi
 from app.backend.dto.user import UserResponse, LinkTelegramRequest
 from app.database.repository.UserRepository import UserRepository
+from app.handler.state import MenuStateGroup
 
 
 class UserService:
@@ -28,9 +29,4 @@ class UserService:
         await message.reply(response.message)
         if response.status in (200, 409):
             await UserRepository.save_user(message)
-            await UserService.open_menu(dialog_manager)
-
-    @staticmethod
-    async def open_menu(dialog_manager: DialogManager):
-        from app.dialog import MenuDialog
-        await dialog_manager.start(MenuDialog.StateGroup.menu)
+            await dialog_manager.start(MenuStateGroup.menu)

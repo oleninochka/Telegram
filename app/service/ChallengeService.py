@@ -6,8 +6,9 @@ from aiogram_dialog import DialogManager
 from aiogram_dialog.widgets.input import MessageInput
 
 from app.backend.api import ChallengeApi
-from app.backend.dto.base import ApiResponse
 from app.backend.dto.challenge import ChallengeResponse, SubmitRequest
+from app.backend.dto.container import ApiResponse
+from app.handler.state import ChallengeStateGroup
 from app.utils import delete_message_input
 
 
@@ -24,16 +25,15 @@ class ChallengeService:
 
     @staticmethod
     async def select(message: Message, input: MessageInput, dialog_manager: DialogManager):
-        from app.dialog import ChallengeDialog
         challenge_id = message.text
         response = await ChallengeApi.find_by_id(challenge_id)
         if response.status != 200:
             await message.reply(response.message)
-            await dialog_manager.switch_to(ChallengeDialog.StateGroup.menu)
+            await dialog_manager.switch_to(ChallengeStateGroup.menu)
         else:
             await delete_message_input(message)
             await dialog_manager.update({'challenge': response})
-            await dialog_manager.switch_to(ChallengeDialog.StateGroup.challenge)
+            await dialog_manager.switch_to(ChallengeStateGroup.challenge)
 
     @staticmethod
     async def render_challenge(dialog_manager: DialogManager, **kwargs):
@@ -42,9 +42,8 @@ class ChallengeService:
 
     @staticmethod
     async def submit(message: Message, input: MessageInput, dialog_manager: DialogManager):
-        from app.dialog import ChallengeDialog
         challenge: ApiResponse[ChallengeResponse] = dialog_manager.dialog_data['challenge']
         request = SubmitRequest.build(message)
         response = await ChallengeApi.submit(challenge.data.id, request)
         await message.reply(response.message)
-        await dialog_manager.switch_to(ChallengeDialog.StateGroup.menu)
+        await dialog_manager.switch_to(ChallengeStateGroup.menu)
