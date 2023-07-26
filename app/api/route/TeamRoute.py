@@ -14,4 +14,4 @@ class TeamRoute:
 
     @staticmethod
     def participate(team_id: str) -> str:
-        return TeamRoute.route.url + f'/team/{team_id}/participate'
+        return TeamRoute.route.url + f'/team/{team_id}/participant'

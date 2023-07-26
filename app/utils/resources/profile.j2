@@ -1,9 +1,9 @@
-Имя: {{ name }}
+Имя: {{ user.user.name }}
 
-Личные баллы: <code>150.0</code>
+Личные баллы: <code>{{ user.score }}</code>
 
 {% if team %}
-Команда: {{ team.name }}
+Команда: {{ team.team.name }}
 
-Командные баллы: <code>1250.0</code>
+Командные баллы: <code>{{ team.score }}</code>
 {% endif %}

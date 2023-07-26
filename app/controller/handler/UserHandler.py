@@ -1,8 +1,10 @@
+import asyncio
 from dataclasses import asdict
 from typing import List, Dict, Any
 
 from aiogram.types import Message, Chat
 from aiogram_dialog import DialogManager
+from aiogram_dialog.widgets.common import Whenable
 from aiogram_dialog.widgets.input import MessageInput
 
 from app.api.dto.user import UserResponse, LinkTelegramRequest
@@ -40,3 +42,10 @@ class UserHandler:
             telegramId=str(message.from_user.id),
             chatId=str(message.chat.id),
         )
+
+    @staticmethod
+    def not_in_team(data: Dict, widget: Whenable, manager: DialogManager):
+        chat: Chat = data['middleware_data']['event_chat']
+        loop = asyncio.get_event_loop()
+        user = loop.run_until_complete(UserService.find_by_chat_id(chat.id))
+        return user.data.team is None

@@ -29,7 +29,7 @@ menu = Window(
 )
 
 select = Window(
-    Format('{item.name}'),
+    Format('{name}'),
     Row(
         SwitchTo(Const('Назад'), id='back', state=TeamStateGroup.menu),
         SwitchTo(Const('Присоединиться'), id='submit', state=TeamStateGroup.participate),

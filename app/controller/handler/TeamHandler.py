@@ -9,7 +9,7 @@ from app.api.dto.base import ApiResponse
 from app.api.dto.team import TeamResponse, ParticipateRequest
 from app.api.service import TeamService
 from app.database.entity import User
-from app.view.state import TeamStateGroup
+from app.view.state import TeamStateGroup, MenuStateGroup
 
 
 class TeamHandler:
@@ -39,7 +39,10 @@ class TeamHandler:
         request = TeamHandler.participate_request(message)
         response = await TeamService.participate(team.data.id, request)
         await message.reply(response.message)
-        await dialog_manager.switch_to(TeamStateGroup.menu)
+        if response.status == 200:
+            await dialog_manager.done()
+        else:
+            await dialog_manager.switch_to(TeamStateGroup.menu)
 
     @staticmethod
     def participate_request(message: Message) -> ParticipateRequest:

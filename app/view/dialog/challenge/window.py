@@ -7,6 +7,7 @@ from aiogram_dialog.widgets.kbd import Row, SwitchTo, ScrollingGroup, Select, Ca
 from aiogram_dialog.widgets.text import Const, Format
 
 from app.controller.handler import ChallengeHandler
+from app.utils import TemplateLoader
 from app.view.state import ChallengeStateGroup
 
 menu = Window(
@@ -29,7 +30,7 @@ menu = Window(
 )
 
 select = Window(
-    Format('{item.name}'),
+    TemplateLoader.load('challenge'),
     Row(
         SwitchTo(Const('Назад'), id='back', state=ChallengeStateGroup.menu),
         SwitchTo(Const('Сдать флаг'), id='submit', state=ChallengeStateGroup.submit),
