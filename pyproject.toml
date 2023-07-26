@@ -25,6 +25,9 @@ nest-asyncio = "1.5.6"
 peewee = "3.16.2"
 pymysql = "1.1.0"
 
+# Cache
+redis = "4.6.0"
+
 # Config
 pyyaml = "6.0.1"
 python-dotenv = "1.0.0"

@@ -5,7 +5,7 @@ from aiogram.types import Chat
 
 from app.api.dto.score import UserScoreResponse, TeamScoreResponse
 from app.api.service import ScoreService
-from app.database.entity import User
+from app.database import User
 
 
 class ScoreHandler:

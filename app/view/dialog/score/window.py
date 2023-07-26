@@ -3,7 +3,7 @@ from aiogram_dialog.widgets.kbd import Cancel
 from aiogram_dialog.widgets.text import Const
 
 from app.controller.handler import ScoreHandler
-from app.utils import TemplateLoader
+from app.view.template import TemplateLoader
 from app.view.state import ScoreStateGroup
 
 user_scoreboard = Window(

@@ -1,10 +1,9 @@
 import nest_asyncio
 from aiogram import Dispatcher
-from aiogram.fsm.storage.memory import MemoryStorage
 
-from app.config import BotConfig
+from app.config import BotConfig, RedisConfig
 
 nest_asyncio.apply()
-storage = MemoryStorage()
+storage = RedisConfig.load().storage
 dp = Dispatcher(storage=storage)
 bot = BotConfig.load().bot

@@ -8,8 +8,8 @@ from aiogram_dialog.widgets.input import MessageInput
 from app.api.dto.base import ApiResponse
 from app.api.dto.team import TeamResponse, ParticipateRequest
 from app.api.service import TeamService
-from app.database.entity import User
-from app.view.state import TeamStateGroup, MenuStateGroup
+from app.database import User
+from app.view.state import TeamStateGroup
 
 
 class TeamHandler:

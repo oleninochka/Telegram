@@ -1,3 +1,3 @@
-from app.config.DatabaseConfig import DatabaseConfig
+from app.database.User import User
 
-db = DatabaseConfig.load().connection
+User.create_table()

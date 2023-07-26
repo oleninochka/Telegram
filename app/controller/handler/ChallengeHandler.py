@@ -8,7 +8,7 @@ from aiogram_dialog.widgets.input import MessageInput
 from app.api.dto.base import ApiResponse
 from app.api.dto.challenge import ChallengeResponse, SubmitRequest
 from app.api.service import ChallengeService
-from app.database.entity import User
+from app.database import User
 from app.view.state import ChallengeStateGroup
 
 

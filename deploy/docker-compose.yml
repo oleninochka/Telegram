@@ -16,6 +16,7 @@ services:
       - "3306:3306"
     networks:
       - external-network
+      - internal-network
 
   redis:
     image: redis
@@ -24,7 +25,9 @@ services:
       - "6379:6379"
     networks:
       - external-network
+      - internal-network
 
 networks:
+  internal-network:
   external-network:
     external: true

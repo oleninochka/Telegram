@@ -3,7 +3,7 @@ from aiogram_dialog.widgets.kbd import Button, Row, Start
 from aiogram_dialog.widgets.text import Const
 
 from app.controller.handler import UserHandler, ScoreHandler
-from app.utils import TemplateLoader
+from app.view.template import TemplateLoader
 from app.view.state import ChallengeStateGroup, MenuStateGroup, TeamStateGroup, ScoreStateGroup
 
 menu = Window(

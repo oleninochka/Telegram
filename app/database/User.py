@@ -1,6 +1,6 @@
 from peewee import CharField, IntegerField
 
-from app.database.entity.BaseModel import BaseModel
+from app.database.BaseModel import BaseModel
 
 
 class User(BaseModel):

@@ -1,6 +1,6 @@
 from aiogram.types import Message
 
-from app.database.entity.User import User
+from app.database.User import User
 
 
 async def authenticated(message: Message) -> bool:

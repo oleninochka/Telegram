@@ -9,7 +9,7 @@ from aiogram_dialog.widgets.input import MessageInput
 
 from app.api.dto.user import UserResponse, LinkTelegramRequest
 from app.api.service import UserService
-from app.database.repository.UserRepository import UserRepository
+from app.database import User
 from app.view.state import MenuStateGroup
 
 
@@ -31,7 +31,7 @@ class UserHandler:
         if response.status != 409:
             await message.reply(response.message)
         if response.status == 200:
-            await UserRepository.save_user(message)
+            await UserHandler.save_user(message)
             await dialog_manager.done()
             await dialog_manager.start(MenuStateGroup.menu)
 
@@ -42,6 +42,16 @@ class UserHandler:
             telegramId=str(message.from_user.id),
             chatId=str(message.chat.id),
         )
+
+    @staticmethod
+    async def save_user(message: Message):
+        response = await UserService.find_by_chat_id(message.chat.id)
+        user = User(
+            id=response.data.id,
+            telegram_id=message.from_user.id,
+            chat_id=message.chat.id,
+        )
+        user.save(force_insert=True)
 
     @staticmethod
     def not_in_team(data: Dict, widget: Whenable, manager: DialogManager):

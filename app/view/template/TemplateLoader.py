@@ -8,6 +8,6 @@ class TemplateLoader:
 
     @staticmethod
     def load(name: str) -> Jinja:
-        path = os.path.join(TemplateLoader.base_path, 'resources', f'{name}.j2')
+        path = os.path.join(TemplateLoader.base_path, 'templates', f'{name}.j2')
         template = open(path, encoding='utf-8').read()
         return Jinja(template)
