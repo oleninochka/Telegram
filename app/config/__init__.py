@@ -5,4 +5,4 @@ from .DatabaseConfig import DatabaseConfig
 from .RedisConfig import RedisConfig
 from .RouteConfig import RouteConfig
 
-load_dotenv()
+load_dotenv('../deploy/config/.env')
