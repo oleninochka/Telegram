@@ -16,7 +16,7 @@ blue = "0.9.1"
 
 [tool.poetry.dependencies]
 # Core
-python = "~3.11"
+python = "^3.10"
 aiogram = "3.0.0b5"
 aiogram_dialog = "2.0.0b18"
 nest-asyncio = "1.5.6"

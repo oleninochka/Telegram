@@ -13,7 +13,8 @@ class BotConfig:
 
     @staticmethod
     def load() -> BotConfig:
-        return BotConfig(token=os.getenv('BOT_TOKEN'))
+        token = os.getenv('BOT_TOKEN').replace('"', '')
+        return BotConfig(token=token)
 
     @property
     def bot(self) -> Bot:
