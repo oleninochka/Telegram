@@ -1,5 +1,5 @@
 from aiogram_dialog import Window
-from aiogram_dialog.widgets.kbd import Row, Start
+from aiogram_dialog.widgets.kbd import Row, Start, Button
 from aiogram_dialog.widgets.text import Const
 
 from app.controller.handler import UserHandler, ScoreHandler
@@ -11,6 +11,7 @@ menu = Window(
     Start(Const('Задачи'), id='challenges', state=ChallengeStateGroup.menu),
     Start(Const('Мероприятия'), id='events', state=EventStateGroup.menu),
     Start(Const('Присоединиться к команде'), id='teams', state=TeamStateGroup.menu, when=UserHandler.not_in_team),
+    Button(Const('Администрирование'), id='admin', when=UserHandler.is_admin),
     Row(
         Start(Const('Личный рейтинг'), id='personal_rating', state=ScoreStateGroup.user_scoreboard),
         Start(Const('Командный рейтинг'), id='team_rating', state=ScoreStateGroup.team_scoreboard),

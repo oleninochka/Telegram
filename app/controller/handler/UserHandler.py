@@ -57,3 +57,10 @@ class UserHandler:
         loop = asyncio.get_event_loop()
         user = loop.run_until_complete(UserService.find_by_chat_id(chat.id))
         return user.data.team is None
+
+    @staticmethod
+    def is_admin(data: Dict, widget: Whenable, manager: DialogManager):
+        chat: Chat = data['middleware_data']['event_chat']
+        loop = asyncio.get_event_loop()
+        user = loop.run_until_complete(UserService.find_by_chat_id(chat.id))
+        return user.data.admin

@@ -10,3 +10,4 @@ class UserResponse(BaseResponse):
     id: str
     name: str
     team: Optional[TeamResponse] = None
+    admin: bool = False
