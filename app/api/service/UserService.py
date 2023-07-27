@@ -1,5 +1,3 @@
-from dataclasses import asdict
-
 from aiohttp import ClientSession
 
 from app.api.dto.base import PageResponse, ApiResponse
@@ -26,5 +24,5 @@ class UserService:
     async def link_telegram(request: LinkTelegramRequest) -> ApiResponse:
         async with ClientSession() as api:
             route = UserRoute.link_telegram()
-            async with api.post(route, json=asdict(request)) as response:
+            async with api.post(route, json=request.as_json()) as response:
                 return await ApiResponse.parse(response)

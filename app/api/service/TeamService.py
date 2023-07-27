@@ -1,5 +1,3 @@
-from dataclasses import asdict
-
 from aiohttp import ClientSession
 
 from app.api.dto.base import ApiResponse, PageResponse
@@ -26,5 +24,5 @@ class TeamService:
     async def participate(team_id: str, request: ParticipateRequest) -> ApiResponse:
         async with ClientSession() as api:
             route = TeamRoute.participate(team_id)
-            async with api.post(route, json=asdict(request)) as response:
+            async with api.post(route, json=request.as_json()) as response:
                 return await ApiResponse.parse(response)

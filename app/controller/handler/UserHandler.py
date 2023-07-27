@@ -1,5 +1,4 @@
 import asyncio
-from dataclasses import asdict
 from typing import List, Dict, Any
 
 from aiogram.types import Message, Chat
@@ -22,7 +21,7 @@ class UserHandler:
     @staticmethod
     async def find_by_id(event_chat: Chat, **kwargs) -> Dict[str, Any]:
         response = await UserService.find_by_chat_id(event_chat.id)
-        return asdict(response.data)
+        return response.data.as_json()
 
     @staticmethod
     async def link_telegram(message: Message, input: MessageInput, dialog_manager: DialogManager):
@@ -30,7 +29,7 @@ class UserHandler:
         response = await UserService.link_telegram(request)
         if response.status != 409:
             await message.reply(response.message)
-        if response.status == 200:
+        if response.status in (200, 409):
             await UserHandler.save_user(message)
             await dialog_manager.done()
             await dialog_manager.start(MenuStateGroup.menu)
@@ -46,12 +45,11 @@ class UserHandler:
     @staticmethod
     async def save_user(message: Message):
         response = await UserService.find_by_chat_id(message.chat.id)
-        user = User(
+        User.create(
             id=response.data.id,
             telegram_id=message.from_user.id,
             chat_id=message.chat.id,
         )
-        user.save(force_insert=True)
 
     @staticmethod
     def not_in_team(data: Dict, widget: Whenable, manager: DialogManager):

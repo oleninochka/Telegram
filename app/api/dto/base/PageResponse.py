@@ -6,12 +6,13 @@ from typing import List, Type, Dict, TypeVar, Generic
 from aiohttp import ClientResponse
 
 from app.api.dto.base import ApiResponse, BaseResponse
+from app.api.dto.base.Serializable import Serializable
 
 T = TypeVar('T', BaseResponse, BaseResponse)
 
 
 @dataclass
-class PageResponse(Generic[T]):
+class PageResponse(Generic[T], Serializable):
     content: List[T]
     totalPages: int
     page: int

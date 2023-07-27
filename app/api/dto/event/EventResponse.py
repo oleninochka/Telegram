@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from datetime import datetime
 from typing import Optional
 
 from app.api.dto.base import BaseResponse
@@ -10,5 +11,5 @@ class EventResponse(BaseResponse):
     title: str
     speaker: str
     affiliate: Optional[str]
-    start: str
-    end: str
+    start: datetime
+    end: datetime

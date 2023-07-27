@@ -2,20 +2,21 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from types import NoneType
-from typing import Generic, Type, Dict, TypeVar, Optional, Any
+from typing import Generic, Type, Dict, TypeVar, Optional
 
 from aiohttp import ClientResponse
 
 from app.api.dto.base import BaseResponse
+from app.api.dto.base.Serializable import Serializable
 
-T = TypeVar('T', BaseResponse, BaseResponse)
+T = TypeVar('T', Serializable, BaseResponse)
 
 
 @dataclass
-class ApiResponse(Generic[T]):
+class ApiResponse(Generic[T], Serializable):
     status: int
     message: Optional[str]
-    data: Optional[T] | Optional[Any]
+    data: Optional[T]
 
     @staticmethod
     async def parse(response: ClientResponse, inner: Type[T] = NoneType) -> ApiResponse[T]:

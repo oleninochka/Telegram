@@ -1,4 +1,3 @@
-from dataclasses import asdict
 from typing import List, Dict, Any
 
 from aiogram.types import Message, CallbackQuery
@@ -25,19 +24,20 @@ class ChallengeHandler:
             await callback.message.reply(challenge.message)
             await dialog_manager.switch_to(ChallengeStateGroup.menu)
         else:
-            await dialog_manager.update({'select': challenge})
+            await dialog_manager.update({'select': challenge.as_json()})
             await dialog_manager.switch_to(ChallengeStateGroup.select)
 
     @staticmethod
     async def render(dialog_manager: DialogManager, **kwargs):
-        challenge: ApiResponse = dialog_manager.dialog_data['select']
-        return asdict(challenge.data)
+        select = dialog_manager.dialog_data['select']
+        return ChallengeResponse.parse(select['data']).as_dict()
 
     @staticmethod
     async def submit(message: Message, input: MessageInput, dialog_manager: DialogManager):
-        challenge: ApiResponse[ChallengeResponse] = dialog_manager.dialog_data['select']
+        select = dialog_manager.dialog_data['select']
+        challenge = ChallengeResponse.parse(select['data'])
         request = ChallengeHandler.submit_request(message)
-        response = await ChallengeService.submit(challenge.data.id, request)
+        response = await ChallengeService.submit(challenge.id, request)
         await message.reply(response.message)
         await dialog_manager.switch_to(ChallengeStateGroup.menu)
 

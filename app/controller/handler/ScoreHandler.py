@@ -1,4 +1,3 @@
-from dataclasses import asdict
 from typing import List, Dict
 
 from aiogram.types import Chat
@@ -13,7 +12,7 @@ class ScoreHandler:
     async def profile_score(event_chat: Chat, **kwargs) -> Dict:
         user: User = User.get_or_none(User.chat_id == event_chat.id)
         profile = await ScoreService.profile_score(user.id)
-        return asdict(profile.data)
+        return profile.data.as_json()
 
     @staticmethod
     async def user_scoreboard(**kwargs) -> Dict[str, List[UserScoreResponse]]:

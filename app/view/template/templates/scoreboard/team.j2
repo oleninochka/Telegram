@@ -1,3 +1,7 @@
+{% if teams %}
 {% for team in teams %}
 {{ team.team.name }} - {{ team.score }}
 {% endfor %}
+{% else %}
+Рейтинг пуст
+{% endif %}

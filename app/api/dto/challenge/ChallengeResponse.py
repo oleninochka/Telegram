@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from datetime import datetime
 from typing import Optional
 
 from app.api.dto.base import BaseResponse
@@ -12,5 +13,5 @@ class ChallengeResponse(BaseResponse):
     weight: float
     team: bool
     visible: bool
-    start: Optional[str]
-    end: Optional[str]
+    start: Optional[datetime]
+    end: Optional[datetime]

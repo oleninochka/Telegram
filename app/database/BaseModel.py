@@ -1,8 +1,6 @@
 from peewee import Model
 
-from app.config import DatabaseConfig
-
-db = DatabaseConfig.load().connection
+from app import db
 
 
 class BaseModel(Model):

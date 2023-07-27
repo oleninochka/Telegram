@@ -1,17 +1,16 @@
 from operator import attrgetter
 
-from aiogram.utils.markdown import html_decoration as hd
 from aiogram_dialog import Window
 from aiogram_dialog.widgets.input import MessageInput
 from aiogram_dialog.widgets.kbd import Row, SwitchTo, ScrollingGroup, Select, Cancel
 from aiogram_dialog.widgets.text import Const, Format
 
 from app.controller.handler import ChallengeHandler
-from app.view.template import TemplateLoader
 from app.view.state import ChallengeStateGroup
+from app.view.template import TemplateLoader
 
 menu = Window(
-    Const(hd.bold('Задачи:')),
+    TemplateLoader.load('challenge/list'),
     ScrollingGroup(
         Select(
             Format('{item.weight} | {item.name}'),
@@ -30,7 +29,7 @@ menu = Window(
 )
 
 select = Window(
-    TemplateLoader.load('challenge'),
+    TemplateLoader.load('challenge/challenge'),
     Row(
         SwitchTo(Const('Назад'), id='back', state=ChallengeStateGroup.menu),
         SwitchTo(Const('Сдать флаг'), id='submit', state=ChallengeStateGroup.submit),

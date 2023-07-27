@@ -1,11 +1,9 @@
-from dataclasses import asdict
 from typing import List, Dict, Any
 
 from aiogram.types import Message, CallbackQuery
 from aiogram_dialog import DialogManager
 from aiogram_dialog.widgets.input import MessageInput
 
-from app.api.dto.base import ApiResponse
 from app.api.dto.team import TeamResponse, ParticipateRequest
 from app.api.service import TeamService
 from app.database import User
@@ -25,19 +23,20 @@ class TeamHandler:
             await callback.message.reply(team.message)
             await dialog_manager.switch_to(TeamStateGroup.menu)
         else:
-            await dialog_manager.update({'select': team})
+            await dialog_manager.update({'select': team.as_json()})
             await dialog_manager.switch_to(TeamStateGroup.select)
 
     @staticmethod
     async def render(dialog_manager: DialogManager, **kwargs):
-        response: ApiResponse = dialog_manager.dialog_data['select']
-        return asdict(response.data)
+        select = dialog_manager.dialog_data['select']
+        return TeamResponse.parse(select['data']).as_dict()
 
     @staticmethod
     async def participate(message: Message, input: MessageInput, dialog_manager: DialogManager):
-        team: ApiResponse[TeamResponse] = dialog_manager.dialog_data['select']
+        select = dialog_manager.dialog_data['select']
+        team = TeamResponse.parse(select['data'])
         request = TeamHandler.participate_request(message)
-        response = await TeamService.participate(team.data.id, request)
+        response = await TeamService.participate(team.id, request)
         await message.reply(response.message)
         if response.status == 200:
             await dialog_manager.done()

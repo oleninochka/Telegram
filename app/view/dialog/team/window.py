@@ -1,6 +1,5 @@
 from operator import attrgetter
 
-from aiogram.utils.markdown import html_decoration as hd
 from aiogram_dialog import Window
 from aiogram_dialog.widgets.input import MessageInput
 from aiogram_dialog.widgets.kbd import Row, SwitchTo, ScrollingGroup, Select, Cancel
@@ -8,9 +7,10 @@ from aiogram_dialog.widgets.text import Const, Format
 
 from app.controller.handler import TeamHandler
 from app.view.state import TeamStateGroup
+from app.view.template import TemplateLoader
 
 menu = Window(
-    Const(hd.bold('Команды:')),
+    TemplateLoader.load('team/list'),
     ScrollingGroup(
         Select(
             Format('{item.name}'),
