@@ -4,7 +4,11 @@
 
 ### Configuration
 
-Copy `config/.env.sample` into `config/.env` and fill in the appropriate fields
+Copy env file and replace variables with your preferred values:
+
+```bash
+cp deploy/config/.env.sample deploy/config/.env
+```
 
 Create virtual environment:
 
