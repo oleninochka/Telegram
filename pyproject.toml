@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "Telegram Bot for CTF platform"
 authors = ["Krasnopolsky Ivan <i1.krasnopolskiy@gmail.com>"]
 readme = "README.md"
-packages = [{ include = "ctf_platform_telegram" }]
+packages = [{ include = "app" }]
 
 [build-system]
 requires = ["poetry-core"]
