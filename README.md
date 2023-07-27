@@ -14,6 +14,7 @@ Create virtual environment:
 
 ```bash
 python3 -m venv .venv
+source .venv/bin/activate
 ```
 
 Install dependencies:
@@ -25,5 +26,6 @@ poetry install
 ### Run in development environment
 
 ```bash
-python3 ./app/main.py
+cd app
+python3 main.py
 ```
