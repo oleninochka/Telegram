@@ -6,6 +6,7 @@ from aiogram_dialog.widgets.kbd import Row, SwitchTo, ScrollingGroup, Select, Ca
 from aiogram_dialog.widgets.text import Const, Format
 
 from app.controller.handler import TeamHandler
+from app.utils import back
 from app.view.state import TeamStateGroup
 from app.view.template import TemplateLoader
 
@@ -23,7 +24,7 @@ menu = Window(
         height=5,
         id='team_group',
     ),
-    Cancel(Const('Назад'), id='back'),
+    Cancel(back, id='back'),
     getter=TeamHandler.list_teams,
     state=TeamStateGroup.menu,
 )
@@ -31,8 +32,8 @@ menu = Window(
 select = Window(
     Format('{name}'),
     Row(
-        SwitchTo(Const('Назад'), id='back', state=TeamStateGroup.menu),
-        SwitchTo(Const('Присоединиться'), id='submit', state=TeamStateGroup.participate),
+        SwitchTo(back, id='back', state=TeamStateGroup.menu),
+        SwitchTo(Const('🤝 Присоединиться'), id='submit', state=TeamStateGroup.participate),
     ),
     getter=TeamHandler.render,
     state=TeamStateGroup.select,
@@ -40,7 +41,7 @@ select = Window(
 
 participate = Window(
     Const('Введите инвайт-токен:'),
-    SwitchTo(Const('Назад'), id='back', state=TeamStateGroup.select),
+    SwitchTo(back, id='back', state=TeamStateGroup.select),
     MessageInput(TeamHandler.participate),
     state=TeamStateGroup.participate,
 )

@@ -5,6 +5,7 @@ from aiogram_dialog.widgets.kbd import Cancel, ScrollingGroup, Select, SwitchTo
 from aiogram_dialog.widgets.text import Const
 
 from app.controller.handler import EventHandler
+from app.utils import back
 from app.view.state import EventStateGroup
 from app.view.template import TemplateLoader
 
@@ -22,14 +23,14 @@ menu = Window(
         height=5,
         id='event_group',
     ),
-    Cancel(Const('Назад'), id='back'),
+    Cancel(back, id='back'),
     getter=EventHandler.list_events,
     state=EventStateGroup.menu,
 )
 
 select = Window(
     TemplateLoader.load('event/event'),
-    SwitchTo(Const('Назад'), id='back', state=EventStateGroup.menu),
+    SwitchTo(back, id='back', state=EventStateGroup.menu),
     getter=EventHandler.render,
     state=EventStateGroup.select,
 )
