@@ -1,6 +1,6 @@
 from aiohttp import ClientSession
 
-from app.api.dto.base import ApiResponse, PageResponse
+from app.api.dto.base import ApiResponse, PageResponse, PageRequest
 from app.api.dto.challenge import ChallengeResponse, SubmitRequest
 from app.api.route import ChallengeRoute
 
@@ -10,7 +10,8 @@ class ChallengeService:
     async def list_challenges() -> ApiResponse[PageResponse[ChallengeResponse]]:
         async with ClientSession() as api:
             route = ChallengeRoute.list_challenges()
-            async with api.get(route) as response:
+            page = PageRequest(size=1_000_000).as_json()
+            async with api.get(route, params=page) as response:
                 return await PageResponse.parse(response, ChallengeResponse)
 
     @staticmethod

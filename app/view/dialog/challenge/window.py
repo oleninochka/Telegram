@@ -40,6 +40,7 @@ select = Window(
 
 submit = Window(
     Const('Введите флаг:'),
+    SwitchTo(Const('Назад'), id='back', state=ChallengeStateGroup.select),
     MessageInput(ChallengeHandler.submit),
     state=ChallengeStateGroup.submit,
 )

@@ -1,6 +1,6 @@
 from aiohttp import ClientSession
 
-from app.api.dto.base import PageResponse, ApiResponse
+from app.api.dto.base import PageResponse, ApiResponse, PageRequest
 from app.api.dto.user import UserResponse, LinkTelegramRequest
 from app.api.route import UserRoute
 
@@ -10,7 +10,8 @@ class UserService:
     async def list_users() -> ApiResponse[PageResponse[UserResponse]]:
         async with ClientSession() as api:
             route = UserRoute.list_users()
-            async with api.get(route) as response:
+            page = PageRequest(size=1_000_000).as_json()
+            async with api.get(route, params=page) as response:
                 return await PageResponse.parse(response, UserResponse)
 
     @staticmethod

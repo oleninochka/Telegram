@@ -1,6 +1,6 @@
 from aiohttp import ClientSession
 
-from app.api.dto.base import ApiResponse, PageResponse
+from app.api.dto.base import ApiResponse, PageResponse, PageRequest
 from app.api.dto.score import ProfileScoreResponse, UserScoreResponse, TeamScoreResponse
 from app.api.route import ScoreRoute
 
@@ -17,12 +17,14 @@ class ScoreService:
     async def user_scoreboard() -> ApiResponse[PageResponse[UserScoreResponse]]:
         async with ClientSession() as api:
             route = ScoreRoute.user_scoreboard()
-            async with api.get(route) as response:
+            page = PageRequest(size=1_000_000).as_json()
+            async with api.get(route, params=page) as response:
                 return await PageResponse.parse(response, UserScoreResponse)
 
     @staticmethod
     async def team_scoreboard() -> ApiResponse[PageResponse[TeamScoreResponse]]:
         async with ClientSession() as api:
             route = ScoreRoute.team_scoreboard()
-            async with api.get(route) as response:
+            page = PageRequest(size=1_000_000).as_json()
+            async with api.get(route, params=page) as response:
                 return await PageResponse.parse(response, TeamScoreResponse)

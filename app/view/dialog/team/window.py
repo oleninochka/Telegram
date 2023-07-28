@@ -40,6 +40,7 @@ select = Window(
 
 participate = Window(
     Const('Введите инвайт-токен:'),
+    SwitchTo(Const('Назад'), id='back', state=TeamStateGroup.select),
     MessageInput(TeamHandler.participate),
     state=TeamStateGroup.participate,
 )

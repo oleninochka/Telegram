@@ -1,3 +1,4 @@
+from .AdminHandler import AdminHandler
 from .ChallengeHandler import ChallengeHandler
 from .EventHandler import EventHandler
 from .ScoreHandler import ScoreHandler

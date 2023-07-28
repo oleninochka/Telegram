@@ -1,6 +1,6 @@
 from aiohttp import ClientSession
 
-from app.api.dto.base import ApiResponse, ListResponse
+from app.api.dto.base import ApiResponse, ListResponse, PageRequest
 from app.api.dto.event import EventResponse
 from app.api.route import EventRoute
 
@@ -10,7 +10,8 @@ class EventService:
     async def list_events() -> ApiResponse[ListResponse[EventResponse]]:
         async with ClientSession() as api:
             route = EventRoute.list_events()
-            async with api.get(route) as response:
+            page = PageRequest(size=1_000_000).as_json()
+            async with api.get(route, params=page) as response:
                 return await ListResponse.parse(response, EventResponse)
 
     @staticmethod

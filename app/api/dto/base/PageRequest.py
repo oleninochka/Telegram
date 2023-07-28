@@ -3,9 +3,11 @@ from __future__ import annotations
 from dataclasses import dataclass
 from enum import Enum
 
+from app.api.dto.base.Serializable import Serializable
+
 
 @dataclass
-class PageRequest:
+class PageRequest(Serializable):
     class Direction(Enum):
         ASC = 'ASC'
         DESC = 'DESC'

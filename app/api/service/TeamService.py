@@ -1,6 +1,6 @@
 from aiohttp import ClientSession
 
-from app.api.dto.base import ApiResponse, PageResponse
+from app.api.dto.base import ApiResponse, PageResponse, PageRequest
 from app.api.dto.team import TeamResponse, ParticipateRequest
 from app.api.route import TeamRoute
 
@@ -10,7 +10,8 @@ class TeamService:
     async def list_teams() -> ApiResponse[PageResponse[TeamResponse]]:
         async with ClientSession() as api:
             route = TeamRoute.list_teams()
-            async with api.get(route) as response:
+            page = PageRequest(size=1_000_000).as_json()
+            async with api.get(route, params=page) as response:
                 return await PageResponse.parse(response, TeamResponse)
 
     @staticmethod

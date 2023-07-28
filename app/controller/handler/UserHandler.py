@@ -1,7 +1,7 @@
 import asyncio
 from typing import List, Dict, Any
 
-from aiogram.types import Message, Chat
+from aiogram.types import Message, Chat, CallbackQuery
 from aiogram_dialog import DialogManager
 from aiogram_dialog.widgets.common import Whenable
 from aiogram_dialog.widgets.input import MessageInput
@@ -64,3 +64,9 @@ class UserHandler:
         loop = asyncio.get_event_loop()
         user = loop.run_until_complete(UserService.find_by_chat_id(chat.id))
         return user.data.admin
+
+    @staticmethod
+    async def exit(callback: CallbackQuery, widget: Any, dialog_manager: DialogManager):
+        user: User = User.get_or_none(User.chat_id == callback.message.chat.id)
+        user.delete_instance()
+        await dialog_manager.done()

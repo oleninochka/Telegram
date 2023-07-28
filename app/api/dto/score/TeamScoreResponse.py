@@ -14,7 +14,4 @@ class TeamScoreResponse(BaseResponse):
     def parse(cls, data: Dict):
         if data is None:
             return None
-        return TeamScoreResponse(
-            score=data['score'],
-            team=TeamResponse.parse(data['team'])
-        )
+        return TeamScoreResponse(score=data['score'], team=TeamResponse.parse(data['team']))
