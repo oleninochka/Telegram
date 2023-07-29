@@ -1,4 +1,4 @@
-version: "3.2"
+version: "3.8"
 
 name: "ctf-platform-telegram"
 
@@ -14,8 +14,6 @@ services:
     depends_on:
       mysql:
         condition: service_healthy
-    ports:
-      - "80:80"
     networks:
       - internal-network
 
@@ -45,5 +43,3 @@ services:
 
 networks:
   internal-network:
-  external-network:
-    external: true

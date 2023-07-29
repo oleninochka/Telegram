@@ -3,7 +3,7 @@ FROM python:3.11-slim as base
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-WORKDIR /app/
+WORKDIR /src/
 
 RUN apt update && apt install -y \
     python3-dev \
@@ -26,8 +26,8 @@ RUN poetry build
 
 FROM base as final
 
-COPY --from=builder /app .
+COPY --from=builder /src .
 
-RUN pip install --no-cache /app/dist/*.whl
+RUN pip install --no-cache /src/dist/*.whl
 
-WORKDIR /app/app
+WORKDIR /src/app
