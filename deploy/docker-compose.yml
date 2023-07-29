@@ -1,9 +1,26 @@
-version: '3.2'
+version: "3.2"
+
+name: "ctf-platform-telegram"
 
 services:
+  app:
+    build: ..
+    command: python3 main.py
+    env_file:
+      - ./config/.env
+    environment:
+      - REDIS_HOST=redis
+      - DB_HOST=mysql
+    depends_on:
+      mysql:
+        condition: service_healthy
+    ports:
+      - "80:80"
+    networks:
+      - internal-network
+
   mysql:
     image: mysql
-    container_name: mysql
     env_file:
       - ./config/.env
     volumes:
@@ -19,7 +36,6 @@ services:
 
   redis:
     image: redis
-    container_name: redis
     ports:
       - "6379:6379"
     volumes:
