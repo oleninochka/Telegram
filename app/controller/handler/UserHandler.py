@@ -31,7 +31,6 @@ class UserHandler:
             await message.reply(response.message)
         if response.status in (200, 409):
             await UserHandler.save_user(message)
-            await dialog_manager.done()
             await dialog_manager.start(MenuStateGroup.menu)
 
     @staticmethod

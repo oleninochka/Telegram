@@ -7,13 +7,13 @@ from aiogram_dialog.widgets.text import Const
 from app.controller.handler import EventHandler
 from app.utils import back
 from app.view.state import EventStateGroup
-from app.view.template import TemplateLoader
+from app.view.static import StaticLoader
 
 menu = Window(
-    TemplateLoader.load('event/list'),
+    StaticLoader.template('event/list'),
     ScrollingGroup(
         Select(
-            TemplateLoader.load('event/preview'),
+            StaticLoader.template('event/preview'),
             item_id_getter=attrgetter('id'),
             items='events',
             id='event_select',
@@ -29,7 +29,7 @@ menu = Window(
 )
 
 select = Window(
-    TemplateLoader.load('event/event'),
+    StaticLoader.template('event/event'),
     SwitchTo(back, id='back', state=EventStateGroup.menu),
     getter=EventHandler.render,
     state=EventStateGroup.select,

@@ -15,3 +15,4 @@ class ChallengeResponse(BaseResponse):
     visible: bool
     start: Optional[datetime]
     end: Optional[datetime]
+    solved: bool

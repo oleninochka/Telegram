@@ -8,10 +8,10 @@ from aiogram_dialog.widgets.text import Const, Format
 from app.controller.handler import TeamHandler
 from app.utils import back
 from app.view.state import TeamStateGroup
-from app.view.template import TemplateLoader
+from app.view.static import StaticLoader
 
 menu = Window(
-    TemplateLoader.load('team/list'),
+    StaticLoader.template('team/list'),
     ScrollingGroup(
         Select(
             Format('{item.name}'),
