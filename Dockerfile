@@ -6,9 +6,7 @@ ENV PYTHONUNBUFFERED 1
 WORKDIR /src/
 
 RUN apt update && apt install -y \
-    python3-dev \
     build-essential \
-    libssl-dev \
     default-libmysqlclient-dev \
     pkg-config
 
