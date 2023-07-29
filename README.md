@@ -2,6 +2,18 @@
 
 ## Quickstart
 
+### Requirements
+
+**Development:**
+
+- Python 3.11
+- Poetry
+
+**Deploy:**
+
+- Docker
+- Docker Compose
+
 ### Configuration
 
 Copy env file and replace variables with your preferred values:
@@ -10,10 +22,17 @@ Copy env file and replace variables with your preferred values:
 cp deploy/config/.env.sample deploy/config/.env
 ```
 
+### Run in development environment
+
 Create virtual environment:
 
 ```bash
 python3 -m venv .venv
+```
+
+Activate virtual environment:
+
+```bash
 source .venv/bin/activate
 ```
 
@@ -23,9 +42,22 @@ Install dependencies:
 poetry install
 ```
 
-### Run in development environment
+Copy env file:
 
 ```bash
-cd app
-python3 main.py
+cp deploy/config/.env app/.env
+```
+
+Run project:
+
+```bash
+cd app && python3 main.py
+```
+
+### Run in production environment
+
+Build and run containers:
+
+```bash
+cd deploy && docker compose up -d
 ```
