@@ -28,7 +28,7 @@ menu = Window(
         Start(Const("📊 Командный рейтинг"), id="team_rating", state=ScoreStateGroup.team_scoreboard),
     ),
     Start(Const("🛠️ Администрирование"), id="menu", state=AdminStateGroup.menu, when=UserHandler.is_admin),
-    Url(Const("✉️ Отправить анти-таск"), Const("https://www.youtube.com/watch?v=dQw4w9WgXcQ")),
+    Url(Const("✉️ Отправить анти-таск"), Const("https://forms.gle/3uTjsjcffwaB4kfKA")),
     Start(Const("🆘 Поддержка"), id="support", state=SupportStateGroup.menu),
     state=MenuStateGroup.menu,
     getter=ScoreHandler.profile_score,
