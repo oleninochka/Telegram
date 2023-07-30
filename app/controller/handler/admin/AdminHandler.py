@@ -12,7 +12,8 @@ from app.view.state.admin import AdminStateGroup
 class AdminHandler:
     @staticmethod
     async def broadcast(message: Message, _: MessageInput, dialog_manager: DialogManager):
-        tasks = [bot.send_message(user.chat_id, message.text) for user in User.select()]
-        await asyncio.gather(*tasks)
+        for user in User.select():
+            await bot.send_message(user.chat_id, message.text)
+            await asyncio.sleep(0.5)
         await message.reply("Рассылка отправлена")
         await dialog_manager.switch_to(AdminStateGroup.menu)

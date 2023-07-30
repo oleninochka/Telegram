@@ -27,11 +27,11 @@ menu = Window(
         Start(Const("📈 Личный рейтинг"), id="personal_rating", state=ScoreStateGroup.user_scoreboard),
         Start(Const("📊 Командный рейтинг"), id="team_rating", state=ScoreStateGroup.team_scoreboard),
     ),
-    Start(Const("🛠️ Администрирование"), id="menu", state=AdminStateGroup.menu, when=UserHandler.is_admin),
     Row(
         Url(Const("🛸 Диск"), Const("http://192.168.10.203/s/n7VN8jKnqCJsH7F")),
         Url(Const("🚩 AntiCTF"), Const("https://forms.gle/3uTjsjcffwaB4kfKA")),
     ),
+    Start(Const("🛠️ Администрирование"), id="menu", state=AdminStateGroup.menu, when=UserHandler.is_admin),
     Start(Const("🆘 Поддержка"), id="support", state=SupportStateGroup.menu),
     state=MenuStateGroup.menu,
     getter=ScoreHandler.profile_score,
