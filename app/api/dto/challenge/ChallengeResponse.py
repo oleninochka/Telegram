@@ -9,7 +9,7 @@ from app.api.dto.base import BaseResponse
 class ChallengeResponse(BaseResponse):
     id: str
     name: str
-    description: str
+    description: Optional[str]
     weight: float
     team: bool
     visible: bool
