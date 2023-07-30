@@ -28,7 +28,7 @@ menu = Window(
         Start(Const("📊 Командный рейтинг"), id="team_rating", state=ScoreStateGroup.team_scoreboard),
     ),
     Row(
-        Url(Const("🛸 Диск"), Const("http://192.168.10.203/s/n7VN8jKnqCJsH7F")),
+        Url(Const("🛸 Диск"), Const("http://owncloud.letoctf/s/n7VN8jKnqCJsH7F")),
         Url(Const("🚩 AntiCTF"), Const("https://forms.gle/3uTjsjcffwaB4kfKA")),
     ),
     Start(Const("🛠️ Администрирование"), id="menu", state=AdminStateGroup.menu, when=UserHandler.is_admin),
