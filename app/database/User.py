@@ -9,4 +9,4 @@ class User(BaseModel):
     telegram_id = IntegerField(null=False)
 
     class Meta:
-        table_name = 'User'
+        table_name = "User"

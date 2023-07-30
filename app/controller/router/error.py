@@ -9,5 +9,5 @@ logger = logging.getLogger(__name__)
 
 @router.errors()
 async def error_handler(exception: ErrorEvent) -> Any:
-    logger.info('Something went wrong')
+    logger.info("Something went wrong")
     logger.exception(exception)

@@ -1,19 +1,9 @@
-from app.view.dialog.admin.menu.dialog import admin_dialog
-from app.view.dialog.auth.dialog import auth_dialog
-from app.view.dialog.challenge.dialog import challenge_dialog
-from app.view.dialog.event.dialog import event_dialog
-from app.view.dialog.menu.dialog import menu_dialog
-from app.view.dialog.score.dialog import score_dialog
-from app.view.dialog.support.dialog import support_dialog
-from app.view.dialog.team.dialog import team_dialog
+from app.view.dialog.admin import admin_dialogs
+from app.view.dialog.common import common_dialogs
+from app.view.dialog.user import user_dialogs
 
 
 def register_dialogs():
-    auth_dialog()
-    menu_dialog()
-    team_dialog()
-    challenge_dialog()
-    score_dialog()
-    event_dialog()
-    admin_dialog()
-    support_dialog()
+    common_dialogs()
+    user_dialogs()
+    admin_dialogs()

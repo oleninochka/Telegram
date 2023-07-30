@@ -1,6 +1,8 @@
 {% if users %}
+<b>Рейтинг участников:</b>
+
 {% for user in users %}
-{{ user.user.name }} - {{ user.score }}
+{{ loop.index0 + 1 }}. {{ user.user.name }} - {{ user.score }}
 {% endfor %}
 {% else %}
 Рейтинг пуст

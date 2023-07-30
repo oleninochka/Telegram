@@ -12,4 +12,4 @@ class UserScoreResponse(BaseResponse):
 
     @classmethod
     def parse(cls, data: Dict):
-        return UserScoreResponse(score=data['score'], user=UserResponse.parse(data['user']))
+        return UserScoreResponse(score=data["score"], user=UserResponse.parse(data["user"]))

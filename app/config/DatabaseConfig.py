@@ -18,15 +18,15 @@ class DatabaseConfig:
     @staticmethod
     def load() -> DatabaseConfig:
         return DatabaseConfig(
-            host=os.getenv('DB_HOST'),
-            port=os.getenv('DB_PORT'),
-            user=os.getenv('MYSQL_USER'),
-            password=os.getenv('MYSQL_PASSWORD'),
-            database=os.getenv('MYSQL_DATABASE'),
+            host=os.getenv("DB_HOST"),
+            port=os.getenv("DB_PORT"),
+            user=os.getenv("MYSQL_USER"),
+            password=os.getenv("MYSQL_PASSWORD"),
+            database=os.getenv("MYSQL_DATABASE"),
         )
 
     def __str__(self) -> str:
-        return 'mysql://{user}:{password}@{host}:{port}/{database}'.format(**self.__dict__)
+        return "mysql://{user}:{password}@{host}:{port}/{database}".format(**self.__dict__)
 
     @property
     def connection(self) -> MySQLDatabase:

@@ -11,7 +11,7 @@ class ChallengeService:
         async with ClientSession() as api:
             route = ChallengeRoute.list_challenges()
             params = PageRequest(size=1_000_000).as_json()
-            params.update({'userId': user_id})
+            params.update({"userId": user_id})
             async with api.get(route, params=params) as response:
                 return await PageResponse.parse(response, ChallengeResponse)
 
@@ -19,7 +19,7 @@ class ChallengeService:
     async def find_by_id(challenge_id: str, user_id: str) -> ApiResponse[ChallengeResponse]:
         async with ClientSession() as api:
             route = ChallengeRoute.find_by_id(challenge_id)
-            params = {'userId': user_id}
+            params = {"userId": user_id}
             async with api.get(route, params=params) as response:
                 return await ApiResponse.parse(response, ChallengeResponse)
 

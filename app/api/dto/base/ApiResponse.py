@@ -9,7 +9,7 @@ from aiohttp import ClientResponse
 from app.api.dto.base import BaseResponse
 from app.api.dto.base.Serializable import Serializable
 
-T = TypeVar('T', Serializable, BaseResponse)
+T = TypeVar("T", Serializable, BaseResponse)
 
 
 @dataclass
@@ -21,9 +21,9 @@ class ApiResponse(Generic[T], Serializable):
     @staticmethod
     async def parse(response: ClientResponse, inner: Type[T] = NoneType) -> ApiResponse[T]:
         json: Dict = await response.json()
-        data = inner.parse(json['data']) if 'data' in json else None
+        data = inner.parse(json["data"]) if "data" in json else None
         return ApiResponse(
             status=response.status,
-            message=json.get('message', None),
+            message=json.get("message", None),
             data=data,
         )

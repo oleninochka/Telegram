@@ -9,11 +9,11 @@ logging.basicConfig(level=logging.INFO)
 
 def start():
     logger = logging.getLogger(__name__)
-    logger.info('started')
+    logger.info("started")
     try:
         dp.run_polling(bot)
     finally:
-        logger.info('stopped')
+        logger.info("stopped")
 
 
 def main():
@@ -22,5 +22,5 @@ def main():
     start()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

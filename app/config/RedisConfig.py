@@ -15,8 +15,8 @@ class RedisConfig:
     @staticmethod
     def load() -> RedisConfig:
         return RedisConfig(
-            host=os.getenv('REDIS_HOST'),
-            port=int(os.getenv('REDIS_PORT')),
+            host=os.getenv("REDIS_HOST"),
+            port=int(os.getenv("REDIS_PORT")),
         )
 
     @property

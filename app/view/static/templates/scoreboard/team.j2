@@ -1,6 +1,8 @@
 {% if teams %}
+<b>Рейтинг команд:</b>
+
 {% for team in teams %}
-{{ team.team.name }} - {{ team.score }}
+{{ loop.index0 + 1 }}. {{ team.team.name }} - {{ team.score }}
 {% endfor %}
 {% else %}
 Рейтинг пуст

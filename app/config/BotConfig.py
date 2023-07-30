@@ -10,14 +10,11 @@ from aiogram import Bot
 class BotConfig:
     token: str
     support: str
-    parse_mode: str = 'HTML'
+    parse_mode: str = "HTML"
 
     @staticmethod
     def load() -> BotConfig:
-        return BotConfig(
-            token=os.getenv('BOT_TOKEN'),
-            support=os.getenv('SUPPORT_CHANNEL_ID')
-        )
+        return BotConfig(token=os.getenv("BOT_TOKEN"), support=os.getenv("SUPPORT_CHANNEL_ID"))
 
     @property
     def bot(self) -> Bot:
