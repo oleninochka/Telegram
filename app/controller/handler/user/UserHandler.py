@@ -9,7 +9,7 @@ from aiogram_dialog.widgets.input import MessageInput
 from app.api.dto.user import UserResponse, LinkTelegramRequest
 from app.api.service import UserService
 from app.database import User
-from app.view.state.common import MenuStateGroup
+from app.view.state.common import MenuStateGroup, AuthStateGroup
 
 
 class UserHandler:
@@ -25,7 +25,7 @@ class UserHandler:
 
     @staticmethod
     async def link_telegram(message: Message, _: MessageInput, dialog_manager: DialogManager):
-        request = UserHandler.link_telegram_request(message)
+        request = UserHandler.link_telegram_request(message, message.text)
         response = await UserService.link_telegram(request)
         if response.status != 409:
             await message.reply(response.message)
@@ -34,9 +34,20 @@ class UserHandler:
             await dialog_manager.start(MenuStateGroup.menu)
 
     @staticmethod
-    def link_telegram_request(message: Message) -> LinkTelegramRequest:
+    async def link_telegram_on_start(message: Message, dialog_manager: DialogManager):
+        command, token = message.text.split()
+        request = UserHandler.link_telegram_request(message, token)
+        response = await UserService.link_telegram(request)
+        if response.status in (200, 409):
+            await UserHandler.save_user(message)
+            await dialog_manager.start(MenuStateGroup.menu)
+        else:
+            await dialog_manager.start(AuthStateGroup.auth)
+
+    @staticmethod
+    def link_telegram_request(message: Message, token: str) -> LinkTelegramRequest:
         return LinkTelegramRequest(
-            token=message.text,
+            token=token,
             telegramId=str(message.from_user.id),
             chatId=str(message.chat.id),
         )
@@ -44,7 +55,7 @@ class UserHandler:
     @staticmethod
     async def save_user(message: Message):
         response = await UserService.find_by_chat_id(message.chat.id)
-        User.create(
+        User.get_or_create(
             id=response.data.id,
             telegram_id=message.from_user.id,
             chat_id=message.chat.id,
