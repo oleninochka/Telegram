@@ -1,3 +1,4 @@
+from aiogram.types import ContentType
 from aiogram_dialog import Window
 from aiogram_dialog.widgets.kbd import Row, Start, Url
 from aiogram_dialog.widgets.text import Const
@@ -15,6 +16,7 @@ from app.view.state.user import (
 from app.view.static import StaticLoader
 
 menu = Window(
+    StaticLoader.media("logo.png", ContentType.PHOTO),
     StaticLoader.template("profile"),
     Start(Const("🤝 Присоединиться к команде"), id="teams", state=TeamStateGroup.menu, when=UserHandler.not_in_team),
     Row(
