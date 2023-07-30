@@ -2,7 +2,6 @@ from operator import attrgetter
 
 from aiogram_dialog import Window
 from aiogram_dialog.widgets.kbd import Cancel, ScrollingGroup, Select, SwitchTo
-from aiogram_dialog.widgets.text import Const
 
 from app.controller.handler import EventHandler
 from app.utils import back

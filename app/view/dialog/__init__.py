@@ -1,9 +1,10 @@
-from app.view.dialog.admin.dialog import admin_dialog
+from app.view.dialog.admin.menu.dialog import admin_dialog
 from app.view.dialog.auth.dialog import auth_dialog
 from app.view.dialog.challenge.dialog import challenge_dialog
 from app.view.dialog.event.dialog import event_dialog
 from app.view.dialog.menu.dialog import menu_dialog
 from app.view.dialog.score.dialog import score_dialog
+from app.view.dialog.support.dialog import support_dialog
 from app.view.dialog.team.dialog import team_dialog
 
 
@@ -15,3 +16,4 @@ def register_dialogs():
     score_dialog()
     event_dialog()
     admin_dialog()
+    support_dialog()

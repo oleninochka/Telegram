@@ -6,7 +6,7 @@ from aiogram_dialog.widgets.input import MessageInput
 
 from app import bot
 from app.database import User
-from app.view.state import AdminStateGroup
+from app.view.state.admin import AdminStateGroup
 
 
 class AdminHandler:

@@ -9,12 +9,15 @@ from aiogram import Bot
 @dataclass
 class BotConfig:
     token: str
+    support: str
     parse_mode: str = 'HTML'
 
     @staticmethod
     def load() -> BotConfig:
-        token = os.getenv('BOT_TOKEN').replace('"', '')
-        return BotConfig(token=token)
+        return BotConfig(
+            token=os.getenv('BOT_TOKEN'),
+            support=os.getenv('SUPPORT_CHANNEL_ID')
+        )
 
     @property
     def bot(self) -> Bot:

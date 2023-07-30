@@ -1,6 +1,5 @@
 from aiogram_dialog import Window
 from aiogram_dialog.widgets.kbd import Cancel
-from aiogram_dialog.widgets.text import Const
 
 from app.controller.handler import ScoreHandler
 from app.utils import back
