@@ -13,9 +13,10 @@ from app.api.dto.base.Serializable import Serializable
 class BaseResponse(Serializable):
     @staticmethod
     def datetime_from_string(iso_string: str) -> datetime:
-        utc = timezone('UTC')
-        tz = timezone('Europe/Moscow')
-        return datetime.fromisoformat(iso_string).replace(tzinfo=utc).astimezone(tz)
+        time = datetime.fromisoformat(iso_string)
+        if time.tzinfo is None:
+            time = time.replace(tzinfo=timezone('UTC'))
+        return time.astimezone(timezone('Europe/Moscow'))
 
     @classmethod
     def parse(cls, data: Dict):
