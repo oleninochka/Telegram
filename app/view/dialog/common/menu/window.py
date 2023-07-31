@@ -24,8 +24,8 @@ menu = Window(
         Start(Const("📆 Мероприятия"), id="events", state=EventStateGroup.menu)
     ),
     Row(
-        Start(Const("📈 Личный рейтинг"), id="personal_rating", state=ScoreStateGroup.user_scoreboard),
-        Start(Const("📊 Командный рейтинг"), id="team_rating", state=ScoreStateGroup.team_scoreboard),
+        Start(Const("🏅 Личный рейтинг"), id="personal_rating", state=ScoreStateGroup.user_scoreboard),
+        Start(Const("🏆 Командный рейтинг"), id="team_rating", state=ScoreStateGroup.team_scoreboard),
     ),
     Row(
         Url(Const("🛸 Диск"), Const("http://owncloud.letoctf/s/n7VN8jKnqCJsH7F")),
