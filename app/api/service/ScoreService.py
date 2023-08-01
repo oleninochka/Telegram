@@ -17,7 +17,7 @@ class ScoreService:
     async def user_scoreboard() -> ApiResponse[PageResponse[UserScoreResponse]]:
         async with ClientSession() as api:
             route = ScoreRoute.user_scoreboard()
-            page = PageRequest(size=1_000_000).as_json()
+            page = PageRequest(size=1_000_000, field="score", order=PageRequest.Direction.DESC.value).as_json()
             async with api.get(route, params=page) as response:
                 return await PageResponse.parse(response, UserScoreResponse)
 
@@ -25,6 +25,6 @@ class ScoreService:
     async def team_scoreboard() -> ApiResponse[PageResponse[TeamScoreResponse]]:
         async with ClientSession() as api:
             route = ScoreRoute.team_scoreboard()
-            page = PageRequest(size=1_000_000).as_json()
+            page = PageRequest(size=1_000_000, field="score", order=PageRequest.Direction.DESC.value).as_json()
             async with api.get(route, params=page) as response:
                 return await PageResponse.parse(response, TeamScoreResponse)

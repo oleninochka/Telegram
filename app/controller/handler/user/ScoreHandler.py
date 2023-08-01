@@ -1,9 +1,10 @@
+from operator import attrgetter
 from typing import List, Dict
 
 from aiogram.types import Chat
 
 from app.api.dto.score import UserScoreResponse, TeamScoreResponse
-from app.api.service import ScoreService
+from app.api.service import ScoreService, UserService
 from app.database import User
 
 
@@ -15,11 +16,19 @@ class ScoreHandler:
         return profile.data.as_json()
 
     @staticmethod
-    async def user_scoreboard(**kwargs) -> Dict[str, List[UserScoreResponse]]:
+    async def user_scoreboard(event_chat: Chat, **kwargs) -> Dict[str, List[UserScoreResponse]]:
+        user: User = User.get_or_none(User.chat_id == event_chat.id)
         users = await ScoreService.user_scoreboard()
-        return {"users": users.data.content}
+        rating = users.data.content
+        ids = list(map(attrgetter("user.id"), rating))
+        place = ids.index(user.id) + 1 if user.id in ids else "∞"
+        return {"users": rating[:10], "place": place}
 
     @staticmethod
-    async def team_scoreboard(**kwargs) -> Dict[str, List[TeamScoreResponse]]:
+    async def team_scoreboard(event_chat: Chat, **kwargs) -> Dict[str, List[TeamScoreResponse]]:
+        user = await UserService.find_by_chat_id(event_chat.id)
         teams = await ScoreService.team_scoreboard()
-        return {"teams": teams.data.content}
+        rating = teams.data.content
+        ids = list(map(attrgetter("team.id"), rating))
+        place = ids.index(user.data.id) + 1 if user.data.id in ids else "∞"
+        return {"teams": rating[:10], "place": place}
