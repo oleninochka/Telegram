@@ -9,6 +9,7 @@ from app.api.dto.base import BaseResponse
 class EventResponse(BaseResponse):
     id: str
     title: str
+    description: Optional[str]
     speaker: Optional[str]
     affiliate: Optional[str]
     start: datetime

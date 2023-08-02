@@ -1,7 +1,11 @@
 <b>{{ title }}</b>
+{% if description %}
 
-{% if speaker %}
-📣 Спикер: {{ speaker }}{% if affiliate %} от команды {{ affiliate }}{% endif %}
-
+{{ description }}
 {% endif %}
+{% if speaker %}
+
+📣 Спикер: {{ speaker }}{% if affiliate %} от команды {{ affiliate }}{% endif %}
+{% endif %}
+
 🗓 Время проведения: {{ start.strftime('%H:%M') }} - {{ end.strftime('%H:%M') }}

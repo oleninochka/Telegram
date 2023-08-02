@@ -28,4 +28,6 @@ COPY --from=builder /src .
 
 RUN pip install --no-cache /src/dist/*.whl
 
-WORKDIR /src/app
+WORKDIR /src/app/
+
+ENTRYPOINT ["python", "main.py"]

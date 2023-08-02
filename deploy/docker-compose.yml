@@ -5,7 +5,6 @@ name: "ctf-platform-telegram"
 services:
   app:
     build: ..
-    command: python3 main.py
     env_file:
       - ./config/.env
     environment:
