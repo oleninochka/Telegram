@@ -33,7 +33,7 @@ def menu_router():
 
 @dp.message(Command("start"))
 async def handler(message: Message, dialog_manager: DialogManager):
-    if message.text != '/start':
+    if message.text != "/start":
         await UserHandler.link_telegram_on_start(message, dialog_manager)
     else:
         await start_auth_dialog(message, dialog_manager)

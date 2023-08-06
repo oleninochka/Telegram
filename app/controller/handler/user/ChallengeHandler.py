@@ -16,7 +16,7 @@ from app.view.state.user import ChallengeStateGroup
 class ChallengeHandler:
     @staticmethod
     async def list_challenges(
-            event_chat: Chat, dialog_manager: DialogManager, **kwargs
+        event_chat: Chat, dialog_manager: DialogManager, **kwargs
     ) -> Dict[str, List[ChallengeResponse]]:
         user: User = User.get_or_none(User.chat_id == event_chat.id)
         challenges = await ChallengeService.list_challenges(user.id)
@@ -68,7 +68,7 @@ class ChallengeHandler:
 
     @staticmethod
     def filter_solved_challenges(
-            challenges: ApiResponse[PageResponse[ChallengeResponse]], manager: DialogManager
+        challenges: ApiResponse[PageResponse[ChallengeResponse]], manager: DialogManager
     ) -> ApiResponse[PageResponse[ChallengeResponse]]:
         show_solved = manager.dialog_data.get("show_solved", True)
         if not show_solved:

@@ -15,8 +15,8 @@ class BaseResponse(Serializable):
     def datetime_from_string(iso_string: str) -> datetime:
         time = datetime.fromisoformat(iso_string)
         if time.tzinfo is None:
-            time = time.replace(tzinfo=timezone('UTC'))
-        return time.astimezone(timezone('Europe/Moscow'))
+            time = time.replace(tzinfo=timezone("UTC"))
+        return time.astimezone(timezone("Europe/Moscow"))
 
     @classmethod
     def parse(cls, data: Dict):

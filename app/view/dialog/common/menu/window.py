@@ -21,7 +21,7 @@ menu = Window(
     Start(Const("🤝 Присоединиться к команде"), id="teams", state=TeamStateGroup.menu, when=UserHandler.not_in_team),
     Row(
         Start(Const("🦾 Задачи"), id="challenges", state=ChallengeStateGroup.menu),
-        Start(Const("📆 Мероприятия"), id="events", state=EventStateGroup.menu)
+        Start(Const("📆 Мероприятия"), id="events", state=EventStateGroup.menu),
     ),
     Row(
         Start(Const("🏅 Личный рейтинг"), id="personal_rating", state=ScoreStateGroup.user_scoreboard),
